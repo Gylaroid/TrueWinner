@@ -6,14 +6,16 @@ let mainWindow;
 let controlWindow;
 let inputWindow;
 let historyWindow;
-let addEditWindow;
+
 let applyWindow;
 
 let iconPath = __dirname + '/img/icon.png'; //Путь к иконке
 
+
 //Главное окно
 function createMainWindow(){
   mainWindow = new BrowserWindow({
+    webPreferences: { nodeIntegration: true, },
     icon: iconPath,
     fullscreen: true
   });
@@ -35,30 +37,32 @@ function createMainWindow(){
 
 //окно управления
 function createControlWindow(){
-  controlWindow = new BrowserWindow({
+  global.controlWindow = new BrowserWindow({
+    webPreferences: { nodeIntegration: true, },
     width: 700,
     height: 500,
     icon: iconPath
   });
 
-  //controlWindow.setMenu(null);
-
-  controlWindow.loadURL(url.format({
+  global.controlWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'pages/controlPage.html'),
     protocol: 'file',
     slashes: true
   }));
 
-  //win2.webContents.openDevTools();
 
-  controlWindow.on('closed', () => {
+
+  global.controlWindow.on('closed', () => {
     controlWindow = null
   });
+  //global.controlWindow.webContents.openDevTools();
+  //controlWindow.setMenu(null);
 }
 
 //Окно ввода баллов
 function createInputWindow(){
   inputWindow = new BrowserWindow({
+    webPreferences: { nodeIntegration: true, },
     parent: controlWindow,
     modal: true,
     show: false,
@@ -78,6 +82,7 @@ function createInputWindow(){
 //Окно истории
 function createHistoryWindow(){
   historyWindow = new BrowserWindow({
+    webPreferences: { nodeIntegration: true, },
     parent: controlWindow,
     modal: true,
     show: false,
@@ -95,7 +100,8 @@ function createHistoryWindow(){
 
 //Окно добавления/изменения команд
 function createAddEditWindow(){
-  addEditWindow = new BrowserWindow({
+  global.addEditWindow = new BrowserWindow({
+    webPreferences: { nodeIntegration: true, },
     parent: controlWindow,
     modal: true,
     show: false,
@@ -105,7 +111,7 @@ function createAddEditWindow(){
     icon: iconPath
   });
 
-  addEditWindow.loadURL(url.format({
+  global.addEditWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'pages/addEditPage.html'),
     protocol: 'file',
     slashes: true
@@ -115,6 +121,7 @@ function createAddEditWindow(){
 //Окно потдверждения
 function createApplyWindow(){
   applyWindow = new BrowserWindow({
+    webPreferences: { nodeIntegration: true, },
     parent: controlWindow,
     modal: true,
     show: false,
@@ -132,12 +139,12 @@ function createApplyWindow(){
   }));
 }
 
-app.on('ready', createMainWindow);
+//app.on('ready', createMainWindow);
 app.on('ready', createControlWindow);
-app.on('ready', createInputWindow);
-app.on('ready', createHistoryWindow);
+//app.on('ready', createInputWindow);
+//app.on('ready', createHistoryWindow);
 app.on('ready', createAddEditWindow);
-app.on('ready', createApplyWindow);
+//app.on('ready', createApplyWindow);
 
 app.on('window-all-closed', () => {
   app.quit();
