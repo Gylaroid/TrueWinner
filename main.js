@@ -19,7 +19,7 @@ function createMainWindow(){
   mainWindow.setMenu(null);
 
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'mainPage.html'),
+    pathname: path.join(__dirname, 'pages/mainPage.html'),
     protocol: 'file',
     slashes: true
   }));
@@ -42,7 +42,7 @@ function createControlWindow(){
   //controlWindow.setMenu(null);
 
   controlWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'controlPage.html'),
+    pathname: path.join(__dirname, 'pages/controlPage.html'),
     protocol: 'file',
     slashes: true
   }));
@@ -67,7 +67,7 @@ function createInputWindow(){
   });
 
   inputWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'inputPage.html'),
+    pathname: path.join(__dirname, 'pages/inputPage.html'),
     protocol: 'file',
     slashes: true,
   }));
@@ -85,7 +85,7 @@ function createHistoryWindow(){
   });
 
   historyWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'historyPage.html'),
+    pathname: path.join(__dirname, 'pages/historyPage.html'),
     protocol: 'file',
     slashes: true
   }));
@@ -104,7 +104,7 @@ function createAddEditWindow(){
   });
 
   addEditWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'addEditPage.html'),
+    pathname: path.join(__dirname, 'pages/addEditPage.html'),
     protocol: 'file',
     slashes: true
   }));
@@ -124,7 +124,7 @@ function createApplyWindow(){
   });
 
   applyWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'applyPage.html'),
+    pathname: path.join(__dirname, 'pages/applyPage.html'),
     protocol: 'file',
     slashes: true
   }));
