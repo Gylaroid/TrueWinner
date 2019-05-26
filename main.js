@@ -9,10 +9,12 @@ let historyWindow;
 let addEditWindow;
 let applyWindow;
 
+let iconPath = __dirname + '/img/icon.png'; //Путь к иконке
+
 //Главное окно
 function createMainWindow(){
   mainWindow = new BrowserWindow({
-    icon: __dirname + '/img/icon.png',
+    icon: iconPath,
     fullscreen: true
   });
 
@@ -36,7 +38,7 @@ function createControlWindow(){
   controlWindow = new BrowserWindow({
     width: 700,
     height: 500,
-    icon: __dirname + '/img/icon.png'
+    icon: iconPath
   });
 
   //controlWindow.setMenu(null);
@@ -63,7 +65,7 @@ function createInputWindow(){
     frame: false,
     width: 200,
     height: 300,
-    icon: __dirname + '/img/icon.png'
+    icon: iconPath
   });
 
   inputWindow.loadURL(url.format({
@@ -81,7 +83,7 @@ function createHistoryWindow(){
     show: false,
     width: 500,
     height: 700,
-    icon: __dirname + '/img/icon.png'
+    icon: iconPath
   });
 
   historyWindow.loadURL(url.format({
@@ -100,7 +102,7 @@ function createAddEditWindow(){
     //frame: false,
     width: 500,
     height: 500,
-    icon: __dirname + '/img/icon.png'
+    icon: iconPath
   });
 
   addEditWindow.loadURL(url.format({
@@ -120,7 +122,7 @@ function createApplyWindow(){
     transparent: true,
     width: 330,
     height: 330,
-    icon: __dirname + '/img/icon.png'
+    icon: iconPath
   });
 
   applyWindow.loadURL(url.format({
