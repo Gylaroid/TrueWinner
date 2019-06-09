@@ -1,0 +1,9 @@
+{
+  "projectIcon": "/img/g1085.png",
+  "addEditPage": "/pages/addEditPage.html",
+  "applyPage": "/pages/applyPage.html",
+  "controlPage": "/pages/controlPage.html",
+  "historyPage": "/pages/historyPage.html",
+  "inputPage": "/pages/inputPage.html",
+  "mainPage": "/pages/mainPage.html"
+}
