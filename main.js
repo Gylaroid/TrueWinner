@@ -2,27 +2,28 @@ const path = require('path');
 const url = require('url');
 const {app, BrowserWindow} = require('electron');
 
-let mainWindow;
+//let mainWindow;
 let controlWindow;
 let inputWindow;
 let historyWindow;
-
 let applyWindow;
 
-let iconPath = __dirname + '/img/icon.png'; //Путь к иконке
+//let iconPath = __dirname + '/img/icon.png'; //Путь к иконке
+let iconPath = __dirname + '/img/g1085.png'; //Путь к иконке
 
 
 //Главное окно
 function createMainWindow(){
-  mainWindow = new BrowserWindow({
+  global.mainWindow = new BrowserWindow({
     webPreferences: { nodeIntegration: true, },
     icon: iconPath,
-    fullscreen: true
+    width: 800,
+    height: 600
   });
 
-  mainWindow.setMenu(null);
+  global.mainWindow.setMenu(null);
 
-  mainWindow.loadURL(url.format({
+  global.mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'pages/mainPage.html'),
     protocol: 'file',
     slashes: true
@@ -30,7 +31,7 @@ function createMainWindow(){
 
   //win1.webContents.openDevTools();
 
-  mainWindow.on('closed', () => {
+  global.mainWindow.on('closed', () => {
     mainWindow = null
   });
 }
@@ -55,7 +56,7 @@ function createControlWindow(){
   global.controlWindow.on('closed', () => {
     controlWindow = null
   });
-  //global.controlWindow.webContents.openDevTools();
+  global.controlWindow.webContents.openDevTools();
   //controlWindow.setMenu(null);
 }
 
@@ -139,11 +140,11 @@ function createApplyWindow(){
   }));
 }
 
-//app.on('ready', createMainWindow);
+app.on('ready', createMainWindow);
 app.on('ready', createControlWindow);
 //app.on('ready', createInputWindow);
 //app.on('ready', createHistoryWindow);
-app.on('ready', createAddEditWindow);
+//app.on('ready', createAddEditWindow);
 //app.on('ready', createApplyWindow);
 
 app.on('window-all-closed', () => {
