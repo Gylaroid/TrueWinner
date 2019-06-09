@@ -1,9 +1,18 @@
 const url = require('url');
 const path = require('path');
-const remote = require('electron');
-const addEditWindow = require('electron').remote.getGlobal('addEditWindow');//Подключение electron к модулю
-const mainWindow = require('electron').remote.getGlobal('mainWindow');
+const electron = require('electron');
+//const fs = require('fs');
+const addEditWindow = electron.remote.getGlobal('addEditWindow');//Подключение electron к модулю
+const mainWindow = electron.remote.getGlobal('mainWindow');
+const PATHS = electron.remote.getGlobal('PATHS');//Подключение файла с путями
 const $ = window.jQuery = require('jquery');//Подключение jQuery к модулю
+
+const APP_ROOT = electron.remote.getGlobal('APP_ROOT');//Путь к корневой директории
+
+let iconPath = APP_ROOT + PATHS.projectIcon;
+//alert(iconPath);
+
+//const PATHS = JSON.parse(fs.readFileSync('paths.json', 'utf8'));
 
 let status = false;
 let fullscreenStatus = false;
@@ -11,8 +20,10 @@ let fullscreenStatus = false;
 //Функции показаны для примера
 $('#add').click(function(){//Обработка клика по кнопке
   //addEditWindow.show();//Функция открытия
-  let win = new remote.remote.BrowserWindow({
-    parent: remote.remote.getCurrentWindow(),
+  let win = new electron.remote.BrowserWindow({
+    parent: electron.remote.getCurrentWindow(),
+    //icon: __dirname + PATHS.projectIcon,
+    icon: iconPath,
     modal: true,
     show: true,
     //frame: false,
@@ -22,25 +33,22 @@ $('#add').click(function(){//Обработка клика по кнопке
   });
 
   win.loadURL(url.format({
-    pathname: path.join('../', 'pages/addEditPage.html'),
-    //pathname: '../pages/addEditPage.html',
+    pathname: path.join(APP_ROOT, PATHS.addEditPage),
     protocol: 'file',
     slashes: true
   }));
 });
 
+//Функция скрытия
 $('#minimize').click(function(){
-  //addEditWindow.hide();//Функция скрытия
   if(status){
-    mainWindow.minimize();
     mainWindow.setFullScreen(false);
+    mainWindow.minimize();
     fullscreenStatus = false;
     status = false;
   }
   else {
     mainWindow.maximize();
-    //mainWindow.setFullScreen(true);
-    //fullscreenStatus = false;
     status = true;
   }
   console.log('status = ' + status);
@@ -61,7 +69,3 @@ $('#fullscreen').click(function(){
   console.log('status = ' + status);
   console.log('fullscreenStatus = ' + fullscreenStatus);
 })
-
-function openModal(){
-
-}

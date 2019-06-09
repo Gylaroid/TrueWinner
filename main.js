@@ -1,6 +1,9 @@
 const path = require('path');
 const url = require('url');
 const {app, BrowserWindow} = require('electron');
+const fs = require('fs');
+global.APP_ROOT = path.resolve(__dirname);
+global.PATHS = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/paths.json'), 'utf8'));
 
 //let mainWindow;
 let controlWindow;
@@ -9,14 +12,15 @@ let historyWindow;
 let applyWindow;
 
 //let iconPath = __dirname + '/img/icon.png'; //Путь к иконке
-let iconPath = __dirname + '/img/g1085.png'; //Путь к иконке
-
+//let iconPath = __dirname + '/img/g1085.png'; //Путь к иконке
+let iconPath = __dirname + global.PATHS.projectIcon;
 
 //Главное окно
 function createMainWindow(){
   global.mainWindow = new BrowserWindow({
     webPreferences: { nodeIntegration: true, },
     icon: iconPath,
+    //icon: '../img/g1085.png',
     width: 800,
     height: 600
   });
@@ -24,7 +28,7 @@ function createMainWindow(){
   global.mainWindow.setMenu(null);
 
   global.mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'pages/mainPage.html'),
+    pathname: path.join(APP_ROOT, PATHS.mainPage),
     protocol: 'file',
     slashes: true
   }));
@@ -46,7 +50,7 @@ function createControlWindow(){
   });
 
   global.controlWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'pages/controlPage.html'),
+    pathname: path.join(APP_ROOT, PATHS.controlPage),
     protocol: 'file',
     slashes: true
   }));
@@ -74,7 +78,7 @@ function createInputWindow(){
   });
 
   inputWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'pages/inputPage.html'),
+    pathname: path.join(APP_ROOT, PATHS.inputPage),
     protocol: 'file',
     slashes: true,
   }));
@@ -93,7 +97,7 @@ function createHistoryWindow(){
   });
 
   historyWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'pages/historyPage.html'),
+    pathname: path.join(APP_ROOT, PATHS.historyPage),
     protocol: 'file',
     slashes: true
   }));
@@ -113,7 +117,7 @@ function createAddEditWindow(){
   });
 
   global.addEditWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'pages/addEditPage.html'),
+    pathname: path.join(APP_ROOT, PATHS.addEditPage),
     protocol: 'file',
     slashes: true
   }));
@@ -134,7 +138,7 @@ function createApplyWindow(){
   });
 
   applyWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'pages/applyPage.html'),
+    pathname: path.join(APP_ROOT, PATHS.applyPage),
     protocol: 'file',
     slashes: true
   }));
