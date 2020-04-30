@@ -5,7 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "electron": "^5.0.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "nedb": "^1.8.0"
   },
   "devDependencies": {},
